@@ -3,7 +3,7 @@ export class GitHubUsers {
         const endpoint = `https://api.github.com/users/${userName}`
 
         return fetch(endpoint)
-        .then(date => date.json())
+        .then(data => data.json())
         .then(({login, name, public_repos, followers }) => ({
             login: login,
             name: name,
@@ -28,7 +28,7 @@ export class Favorites {
         localStorage.setItem("@github-favorites:", JSON.stringify(this.entries))
     }    
         
-    async  add(username) {
+    async add(username) {
 
         const userExist = this.entries.find(entry => entry.login === username)
 
@@ -43,7 +43,7 @@ export class Favorites {
                 throw new Error("Usuario não encontrado")
             }
             
-            this.entries = [user, ...this.entries] // é como se a gente falsse, pega a nova pessoa mas mantem a anterior tambem, usando esse metodo nao quebramos o principio da imutabilidade
+            this.entries = [user, ...this.entries] // é como se a gente falasse, pega a nova pessoa mas mantem a anterior tambem, usando esse metodo nao quebramos o principio da imutabilidade
             this.update()
             this.save()  
 
